@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import type { ChangeEvent } from "react"
 import Card from "./components/Card"
 import data from "./data.json"
 
@@ -23,22 +24,22 @@ function App() {
   }, [])
 
   const handleToggle = (idx: number) => {
-    setExtensions((prev) =>
-      prev.map((ext, i) =>
+    setExtensions((prev: Extension[]) =>
+      prev.map((ext: Extension, i: number) =>
         i === idx ? { ...ext, isActive: !ext.isActive } : ext
       )
     )
   }
 
   const handleRemove = (idx: number) => {
-    setExtensions((prev) => prev.filter((_, i) => i !== idx))
+    setExtensions((prev: Extension[]) => prev.filter((_: Extension, i: number) => i !== idx))
   }
 
-  const filtered = extensions.filter((ext) => {
+  const filtered = extensions.filter((ext: Extension) => {
     if (filter === "Active") return ext.isActive
     if (filter === "Inactive") return !ext.isActive
     return true
-  }).filter((ext) =>
+  }).filter((ext: Extension) =>
     ext.name.toLowerCase().includes(search.toLowerCase()) ||
     ext.description.toLowerCase().includes(search.toLowerCase())
   )
@@ -54,7 +55,7 @@ function App() {
             type="text"
             placeholder="Search extensions..."
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
             className="w-full bg-slate-800 text-white rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -84,7 +85,7 @@ function App() {
         {filtered.length === 0 && (
           <div className="col-span-full text-center text-slate-400 py-10">No extensions found.</div>
         )}
-        {filtered.map((ext, idx) => (
+        {filtered.map((ext) => (
           <Card
             key={ext.name}
             title={ext.name}
