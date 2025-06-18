@@ -1,36 +1,43 @@
-import type { CardProps } from "./types"
+import Button from "./Button";
+import SwitchButton from "./SwitchButton";
+import { type CardType } from "../types/type";
 
-const Card = ({ title, description, image, isActive, onToggle, onRemove }: CardProps) => {
+export default function Card({
+  name,
+  description,
+  logo,
+  isActive,
+  onRemove,
+  onToggleActive,
+}: CardType & {
+  onRemove?: () => void;
+  onToggleActive?: () => void;
+}) {
   return (
-    <div className="bg-slate-800 rounded-xl p-5 flex flex-col gap-4 shadow-md relative min-h-[180px]">
-      <div className="flex items-center gap-3">
-        <img src={image} alt={title} className="w-10 h-10 rounded" />
-        <div>
-          <h2 className="text-lg font-semibold text-white">{title}</h2>
-          <p className="text-slate-300 text-sm mt-1">{description}</p>
+    <div
+      className={`transition-all duration-300 ${
+        isActive ? "" : "scale-95 opacity-70"
+      }`}
+    >
+      <div className="bg-neutral-0 rounded-4xl border-1 max-w-96 border-neutral-100 p-6 shadow dark:border-neutral-500 dark:bg-neutral-700">
+        <div className="flex items-start gap-4">
+          <img src={logo} alt="image" />
+          <div>
+            <h3 className="font-notosans-b text-2xl dark:text-neutral-100">
+              {name}
+            </h3>
+            <p className="text-neutral-500 dark:text-neutral-200">
+              {description}
+            </p>
+          </div>
+        </div>
+        <div className="mt-8 flex items-center justify-between">
+          <Button modal="" handleClick={onRemove}>
+            Remove
+          </Button>
+          <SwitchButton isActive={isActive} onToggle={onToggleActive} />
         </div>
       </div>
-      <div className="flex items-center justify-between mt-auto">
-        <button
-          className="text-xs px-3 py-1 bg-slate-700 text-red-400 rounded hover:bg-slate-600 transition"
-          onClick={onRemove}
-        >
-          Remove
-        </button>
-        <label className="inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            checked={isActive}
-            onChange={onToggle}
-            className="sr-only peer"
-          />
-          <div className="w-9 h-5 bg-slate-600 rounded-full peer peer-checked:bg-green-500 transition relative">
-            <div className={`absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform ${isActive ? 'translate-x-4' : ''}`}></div>
-          </div>
-        </label>
-      </div>
     </div>
-  )
+  );
 }
-
-export default Card
