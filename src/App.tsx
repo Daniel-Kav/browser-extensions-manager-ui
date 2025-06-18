@@ -48,7 +48,6 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 text-white px-4 pb-10">
       {/* Header */}
       <header className="flex items-center gap-3 py-8 max-w-5xl mx-auto">
-        <img src="./assets/images/logo.svg" alt="Extensions" className="w-10 h-10" />
         <h1 className="text-2xl font-bold flex-1">Extensions</h1>
         <div className="relative flex-1 max-w-md">
           <input
@@ -60,9 +59,6 @@ function App() {
           />
           <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
-        <button className="ml-4 p-2 rounded-full bg-slate-800 hover:bg-slate-700 transition">
-          <img src="./assets/images/icon-moon.svg" alt="Settings" className="w-6 h-6" />
-        </button>
       </header>
 
       {/* Tabs */}
